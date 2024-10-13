@@ -1,2 +1,2 @@
-# OpenWorldConsoleGame
-An Open world Console game made by GameOPro himself.
+An open world console game.
+The code sucks so dont blame me if it doesnt work for you!
