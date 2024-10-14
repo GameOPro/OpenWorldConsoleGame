@@ -33,16 +33,10 @@ int main(){
     game.Init();
     game.Render(true);
 
-    // std::ifstream file_input("C:\\Users\\Game\\Downloads\\cpp test\\nav4\\src\\Map.json");
-    // Json::Reader reader;
-    // Json::Value root;
-    // reader.parse(file_input, root);
-
     while(true){
         game.ProcessInput();
         game.Update();
         
-        //load map from json (to make)
     }
 
     return 1;

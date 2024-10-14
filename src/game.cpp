@@ -88,6 +88,7 @@ void Game::Update(){
     }
     else if(useGravity && Time()+.1f > lastAction){
         do{
+            ProcessInput();
             playerMove = DOWN;
             this->DoCollisions();   
             
@@ -95,7 +96,7 @@ void Game::Update(){
                 plr->Position.y--;
                 this->Render(true);
             }else{jumped = false;}
-        }while(!grounded && Time()+.1f > lastAction);
+        }while(!grounded && Time()+.1f > lastAction && !useGravity);
     }
 }
 
@@ -183,7 +184,7 @@ void Game::ProcessInput(){
             this->Render(true);
         }
 
-        if(GetKeyState('W')  & 0x8000){
+        if(GetAsyncKeyState('W')  & 0x8000){
             teleported = false;
             if(!useGravity){
                 plr->Position.y++;
@@ -214,7 +215,7 @@ void Game::ProcessInput(){
             }
         }
 
-        if(GetKeyState('D') & 0x8000){
+        if(GetAsyncKeyState('D') & 0x8000){
             playerMove = RIGHT;
             teleported = false;
             plr->Position.x++;
@@ -225,7 +226,7 @@ void Game::ProcessInput(){
             }
         }
 
-        if(GetKeyState('S') & 0x8000){
+        if(GetAsyncKeyState('S') & 0x8000){
             if(!useGravity){
                 playerMove = DOWN;
                 teleported = false;
@@ -238,7 +239,7 @@ void Game::ProcessInput(){
             }
         }
 
-        if(GetKeyState('A') & 0x8000){
+        if(GetAsyncKeyState('A') & 0x8000){
             playerMove = LEFT;
             teleported = false;
             plr->Position.x--;
@@ -249,25 +250,25 @@ void Game::ProcessInput(){
             }
         }
 
-        if(GetKeyState(VK_UP) & 0x8000){
+        if(GetAsyncKeyState(VK_UP) & 0x8000){
             if(allowPlacing && PlaceObject(UP)){
                 this->Render(true);
             }
         }
 
-        if(GetKeyState(VK_RIGHT) & 0x8000){
+        if(GetAsyncKeyState(VK_RIGHT) & 0x8000){
             if(allowPlacing && PlaceObject(RIGHT)){
                 this->Render(true);
             }
         }
 
-        if(GetKeyState(VK_DOWN) & 0x8000){
+        if(GetAsyncKeyState(VK_DOWN) & 0x8000){
             if(allowPlacing && PlaceObject(DOWN)){
                 this->Render(true);
             }
         }
 
-        if(GetKeyState(VK_LEFT) & 0x8000){
+        if(GetAsyncKeyState(VK_LEFT) & 0x8000){
             if(allowPlacing && PlaceObject(LEFT)){
                 this->Render(true);
             }
@@ -275,7 +276,7 @@ void Game::ProcessInput(){
 
 
 
-        if(GetKeyState('Q') & 0x8000){
+        if(GetAsyncKeyState('Q') & 0x8000){
             if(Time() > lastUIAction + 0.125f){
                 selectedIdx--;
                 SelectBlock(selectedIdx);
@@ -284,7 +285,7 @@ void Game::ProcessInput(){
             }
         }
 
-        if(GetKeyState('E') & 0x8000){
+        if(GetAsyncKeyState('E') & 0x8000){
             if(Time() > lastUIAction + 0.125f){
                 selectedIdx++;
                 SelectBlock(selectedIdx);
@@ -293,7 +294,7 @@ void Game::ProcessInput(){
             }
         }
         
-        if(GetKeyState(VK_ESCAPE) & 0x8000){
+        if(GetAsyncKeyState(VK_ESCAPE) & 0x8000){
             if(Time() > lastUIAction + 0.3f){
                 this->state = GAME_MENU;
                 lastUIAction = Time();
@@ -301,7 +302,7 @@ void Game::ProcessInput(){
             }
         }
     
-        if(GetKeyState('G') & 0x8000){
+        if(GetAsyncKeyState('G') & 0x8000){
             if(Time() > lastUIAction + 0.1f){
                 useGravity = !useGravity;
                 lastUIAction = Time();
@@ -310,7 +311,7 @@ void Game::ProcessInput(){
             }
         }
     
-        if(GetKeyState('P') & 0x8000){
+        if(GetAsyncKeyState('P') & 0x8000){
             if(Time() > lastUIAction + 0.15f){
                 allowPlacing = !allowPlacing;
                 lastUIAction = Time();
