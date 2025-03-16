@@ -4,3 +4,5 @@ The code sucks so dont blame me if it doesnt work for you!
 Allow the program to create files - by allowing it in the controlled access AV on windows if you want to save and have it on 👍
 
 Probably wont update either 🫠
+
+![Static Badge](https://shields.gameopro.net/badge/Badge-Test-blue)
